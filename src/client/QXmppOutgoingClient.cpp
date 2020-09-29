@@ -591,6 +591,9 @@ void QXmppOutgoingClient::handleStanza(const QDomElement &nodeRecv)
                             emit connected();
                         }
                     }
+                } else if(bind.type() == QXmppIq::Error) {
+                    d->xmppStreamError = bind.error().condition();
+                    emit error(QXmppClient::XmppStreamError);
                 }
             }
             // extensions
